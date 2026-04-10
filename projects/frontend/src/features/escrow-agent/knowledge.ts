@@ -66,7 +66,7 @@ const KNOWLEDGE_TOPICS: KnowledgeTopic[] = [
     topic: 'disputes',
     title: 'Disputes In The Current App',
     answer:
-      'The Disputes tab is present in the UI, but right now it is an illustrative dashboard rather than a fully automated arbitration system. The real on-chain flow today is claim, submit, and creator approval, so disagreements still need manual review instead of smart-contract arbitration.',
+      'The Disputes tab now supports DAO-style dispute voting in the frontend. Users can open a dispute on a bounty, community members vote for creator vs worker, and the case auto-resolves when voting time ends. This is currently app-layer governance logic, while the on-chain payout flow is still create, claim, submit, and creator approval.',
     followUps: ['So what is on-chain today?', 'How is escrow still helpful?', 'What state is stored on-chain?'],
     keywords: ['dispute', 'arbitration', 'under review', 'creator unresponsive', 'conflict', 'appeal'],
   },

@@ -12,7 +12,7 @@ Product facts you must stick to:
 - The current lifecycle is effectively open, claimed, submitted, approved, with some code comments also referencing cancelled.
 - Wallet connection is required for on-chain actions.
 - The app currently runs on Algorand Testnet.
-- The Disputes screen exists in the UI, but it is currently an illustrative dashboard, not a full automated on-chain arbitration system.
+- The Disputes screen supports DAO-style voting in the frontend (open dispute, votes, timed resolution), but payout arbitration is not fully on-chain yet.
 
 Behavior rules:
 - Be accurate and honest about what is implemented today.

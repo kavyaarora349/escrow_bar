@@ -5,7 +5,7 @@ Use this to make all app instances (different ports/servers) show the same bount
 ## 1. Create table and policies
 
 1. Open Supabase SQL Editor.
-2. Run [`supabase/schema.sql`](./supabase/schema.sql).
+2. Run [`supabase/schema.sql`](./supabase/schema.sql) to create both `bounties` and `disputes` tables.
 
 ## 2. Add env variables
 
@@ -26,5 +26,6 @@ npm run dev -- --host 0.0.0.0 --port 5173
 ## Notes
 
 - When Supabase env vars are present, bounties are read/written from Supabase.
+- DAO disputes and voting are also read/written from Supabase.
 - If env vars are missing or Supabase fails, the app falls back to browser `localStorage`.
 - Dashboard cards now use only stored bounty data (no injected mock rows).

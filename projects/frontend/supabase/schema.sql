@@ -33,3 +33,43 @@ on public.bounties for update
 to anon
 using (true)
 with check (true);
+
+create table if not exists public.disputes (
+  id text primary key,
+  bounty_id text not null,
+  bounty_title text not null,
+  amount numeric not null default 0 check (amount >= 0),
+  raised_by text not null,
+  reason text not null,
+  status text not null check (status in ('voting', 'resolved')),
+  created_at bigint not null,
+  voting_ends_at bigint not null,
+  votes_for_creator integer not null default 0 check (votes_for_creator >= 0),
+  votes_for_worker integer not null default 0 check (votes_for_worker >= 0),
+  voters jsonb not null default '[]'::jsonb,
+  resolution text null check (resolution in ('creator', 'worker', 'tie') or resolution is null)
+);
+
+create index if not exists disputes_created_at_idx on public.disputes (created_at desc);
+create index if not exists disputes_status_idx on public.disputes (status);
+
+alter table public.disputes enable row level security;
+
+drop policy if exists "Allow anonymous read disputes" on public.disputes;
+create policy "Allow anonymous read disputes"
+on public.disputes for select
+to anon
+using (true);
+
+drop policy if exists "Allow anonymous write disputes" on public.disputes;
+create policy "Allow anonymous write disputes"
+on public.disputes for insert
+to anon
+with check (true);
+
+drop policy if exists "Allow anonymous update disputes" on public.disputes;
+create policy "Allow anonymous update disputes"
+on public.disputes for update
+to anon
+using (true)
+with check (true);

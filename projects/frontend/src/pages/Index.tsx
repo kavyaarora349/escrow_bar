@@ -113,9 +113,7 @@ const Index = () => {
         <SubmissionsView onBountyClick={setSelectedBounty} />
       )}
 
-      {activeTab === 'disputes' && (
-        <DisputesView />
-      )}
+      {activeTab === 'disputes' && <DisputesView bounties={createdBounties} />}
 
       {/* Modals are kept hidden and conditionally rendered or via prop control state */}
       <BountyDetailModal bounty={selectedBounty} onClose={() => setSelectedBounty(null)} />
