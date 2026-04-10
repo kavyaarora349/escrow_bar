@@ -1,34 +1,34 @@
-import React, { useState, useEffect } from 'react';
-import { useWallet } from '@txnlab/use-wallet-react';
-import { getBountiesByCreator, StoredBounty } from '@/utils/bountyStorage';
-import { Award, User, DollarSign, Zap } from 'lucide-react';
+import React, { useState, useEffect } from 'react'
+import { useWallet } from '@txnlab/use-wallet-react'
+import { getBountiesByCreator, StoredBounty } from '@/utils/bountyStorage'
+import { Award, User, DollarSign, Zap } from 'lucide-react'
 
 interface BountiesListProps {
-  refreshTrigger?: number;
+  refreshTrigger?: number
 }
 
 const BountiesList: React.FC<BountiesListProps> = ({ refreshTrigger = 0 }) => {
-  const { activeAddress } = useWallet();
-  const [bounties, setBounties] = useState<StoredBounty[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { activeAddress } = useWallet()
+  const [bounties, setBounties] = useState<StoredBounty[]>([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     if (activeAddress) {
-      setLoading(true);
-      console.log('📋 BountiesList loading for:', activeAddress);
-      const userBounties = getBountiesByCreator(activeAddress);
-      console.log('📋 Found bounties:', userBounties);
-      setBounties(userBounties);
-      setLoading(false);
+      setLoading(true)
+      console.log('📋 BountiesList loading for:', activeAddress)
+      const userBounties = getBountiesByCreator(activeAddress)
+      console.log('📋 Found bounties:', userBounties)
+      setBounties(userBounties)
+      setLoading(false)
     }
-  }, [activeAddress, refreshTrigger]);
+  }, [activeAddress, refreshTrigger])
 
   if (!activeAddress) {
     return (
       <div className="text-center py-12">
         <p className="text-gray-600">Connect your wallet to see your bounties</p>
       </div>
-    );
+    )
   }
 
   if (loading) {
@@ -36,7 +36,7 @@ const BountiesList: React.FC<BountiesListProps> = ({ refreshTrigger = 0 }) => {
       <div className="text-center py-12">
         <p className="text-gray-600">Loading bounties...</p>
       </div>
-    );
+    )
   }
 
   if (bounties.length === 0) {
@@ -46,13 +46,13 @@ const BountiesList: React.FC<BountiesListProps> = ({ refreshTrigger = 0 }) => {
         <p className="text-gray-600">No bounties created yet</p>
         <p className="text-sm text-gray-500 mt-2">Create your first bounty to get started!</p>
       </div>
-    );
+    )
   }
 
   return (
     <div className="space-y-4">
       <h2 className="text-2xl font-bold text-gray-900 mb-6">My Bounties</h2>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {bounties.map((bounty) => (
           <div
@@ -63,13 +63,11 @@ const BountiesList: React.FC<BountiesListProps> = ({ refreshTrigger = 0 }) => {
               {/* Title and Status */}
               <div className="flex justify-between items-start mb-2">
                 <h3 className="card-title text-lg text-gray-900">{bounty.title}</h3>
-                <span className={`badge ${
-                  bounty.status === 'active'
-                    ? 'badge-success'
-                    : bounty.status === 'claimed'
-                    ? 'badge-warning'
-                    : 'badge-info'
-                }`}>
+                <span
+                  className={`badge ${
+                    bounty.status === 'active' ? 'badge-success' : bounty.status === 'claimed' ? 'badge-warning' : 'badge-info'
+                  }`}
+                >
                   {bounty.status}
                 </span>
               </div>
@@ -93,9 +91,7 @@ const BountiesList: React.FC<BountiesListProps> = ({ refreshTrigger = 0 }) => {
 
                 {/* Category */}
                 <div className="flex items-center gap-2 text-gray-600 text-xs">
-                  <span className="px-2 py-1 bg-purple-100 text-purple-700 rounded-full">
-                    {bounty.category}
-                  </span>
+                  <span className="px-2 py-1 bg-purple-100 text-purple-700 rounded-full">{bounty.category}</span>
                 </div>
 
                 {/* App ID */}
@@ -122,8 +118,8 @@ const BountiesList: React.FC<BountiesListProps> = ({ refreshTrigger = 0 }) => {
                 <button
                   className="btn btn-sm btn-outline"
                   onClick={() => {
-                    navigator.clipboard.writeText(bounty.appAddress);
-                    alert('App address copied!');
+                    navigator.clipboard.writeText(bounty.appAddress)
+                    alert('App address copied!')
                   }}
                 >
                   Copy Address
@@ -142,7 +138,7 @@ const BountiesList: React.FC<BountiesListProps> = ({ refreshTrigger = 0 }) => {
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default BountiesList;
+export default BountiesList

@@ -1,4 +1,4 @@
-# BountyHub - Decentralized Bounty Management Platform
+# Escrow Bar - Decentralized Bounty Management Platform
 
 [![Live Demo Website](https://img.shields.io/badge/🚀_Live_Demo_Website-3b82f6?style=for-the-badge)](https://bounty-hub-three.vercel.app)
 [![Video Demo](https://img.shields.io/badge/🌐_Video_Demo-10b981?style=for-the-badge)](https://drive.google.com/file/d/1mYLZvda3funTpglnUib1QjDsQNsuykFs/view?usp=drive_link)
@@ -15,7 +15,7 @@ It solves trust issues in freelance and hackathon-style bounty systems by introd
 
 ## 🌟 What It Does
 
-**BountyHub enables:**
+**Escrow Bar enables:**
 
 🧑‍💻 **Creators** to post bounties with locked escrow funds  
 👨‍🔧 **Workers** to submit work on-chain  
@@ -96,9 +96,9 @@ An Algorand **smart contract–powered bounty escrow system** that:
 - ❌ High platform fees & centralized control
 - ❌ Geographic & access restrictions
 
-### How BountyHub Solves It
+### How Escrow Bar Solves It
 
-| Problem | Traditional | BountyHub |
+| Problem | Traditional | Escrow Bar |
 |---------|-------------|-----------|
 | **Fund Safety** | Platform holds funds | Smart contract escrow (on-chain) |
 | **Verification** | Manual review | On-chain validation |
@@ -427,7 +427,7 @@ This project demonstrates blockchain use cases **beyond simple payments**:
 ### ✅ Smart Contract Escrow Management
 ```
 Traditional:     Creator → Platform → Worker
-BountyHub:       Creator → Smart Contract Account → Worker
+Escrow Bar:       Creator → Smart Contract Account → Worker
                  (Funds locked until conditions met)
 ```
 

@@ -49,8 +49,12 @@ const SendAlgo = ({ openModal, closeModal }: SendAlgoProps) => {
           <input className="input input-bordered" placeholder="Amount (ALGO)" value={amount} onChange={(e) => setAmount(e.target.value)} />
         </div>
         <div className="modal-action">
-          <button className={`btn btn-primary ${loading ? 'loading' : ''}`} onClick={onSend} disabled={loading}>Send</button>
-          <button className="btn" onClick={closeModal} disabled={loading}>Close</button>
+          <button className={`btn btn-primary ${loading ? 'loading' : ''}`} onClick={onSend} disabled={loading}>
+            Send
+          </button>
+          <button className="btn" onClick={closeModal} disabled={loading}>
+            Close
+          </button>
         </div>
       </form>
     </dialog>
@@ -58,4 +62,3 @@ const SendAlgo = ({ openModal, closeModal }: SendAlgoProps) => {
 }
 
 export default SendAlgo
-

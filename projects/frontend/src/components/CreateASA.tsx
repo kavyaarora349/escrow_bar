@@ -58,11 +58,20 @@ const CreateASA = ({ openModal, closeModal }: CreateASAProps) => {
           <input className="input input-bordered" placeholder="Asset name" value={name} onChange={(e) => setName(e.target.value)} />
           <input className="input input-bordered" placeholder="Unit name" value={unit} onChange={(e) => setUnit(e.target.value)} />
           <input className="input input-bordered" placeholder="Decimals" value={decimals} onChange={(e) => setDecimals(e.target.value)} />
-          <input className="input input-bordered" placeholder="Total (base units)" value={total} onChange={(e) => setTotal(e.target.value)} />
+          <input
+            className="input input-bordered"
+            placeholder="Total (base units)"
+            value={total}
+            onChange={(e) => setTotal(e.target.value)}
+          />
         </div>
         <div className="modal-action">
-          <button className={`btn btn-primary ${loading ? 'loading' : ''}`} onClick={onCreate} disabled={loading}>Create</button>
-          <button className="btn" onClick={closeModal} disabled={loading}>Close</button>
+          <button className={`btn btn-primary ${loading ? 'loading' : ''}`} onClick={onCreate} disabled={loading}>
+            Create
+          </button>
+          <button className="btn" onClick={closeModal} disabled={loading}>
+            Close
+          </button>
         </div>
       </form>
     </dialog>
@@ -70,4 +79,3 @@ const CreateASA = ({ openModal, closeModal }: CreateASAProps) => {
 }
 
 export default CreateASA
-

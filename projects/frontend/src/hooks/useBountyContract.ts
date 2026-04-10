@@ -18,12 +18,18 @@ export type BountyStatusCode = (typeof BOUNTY_STATUS)[keyof typeof BOUNTY_STATUS
 
 export const statusLabel = (code: number): string => {
   switch (code) {
-    case BOUNTY_STATUS.OPEN: return 'Open'
-    case BOUNTY_STATUS.CLAIMED: return 'In Progress'
-    case BOUNTY_STATUS.SUBMITTED: return 'Submitted'
-    case BOUNTY_STATUS.APPROVED: return 'Completed'
-    case BOUNTY_STATUS.CANCELLED: return 'Cancelled'
-    default: return 'Unknown'
+    case BOUNTY_STATUS.OPEN:
+      return 'Open'
+    case BOUNTY_STATUS.CLAIMED:
+      return 'In Progress'
+    case BOUNTY_STATUS.SUBMITTED:
+      return 'Submitted'
+    case BOUNTY_STATUS.APPROVED:
+      return 'Completed'
+    case BOUNTY_STATUS.CANCELLED:
+      return 'Cancelled'
+    default:
+      return 'Unknown'
   }
 }
 
@@ -82,10 +88,7 @@ export function addBountyMeta(meta: BountyMeta) {
 
 export function useBountyContract() {
   const { activeAddress, transactionSigner } = useWallet()
-  const algorand = useMemo(
-    () => AlgorandClient.fromConfig({ algodConfig: getAlgodConfigFromViteEnvironment() }),
-    [],
-  )
+  const algorand = useMemo(() => AlgorandClient.fromConfig({ algodConfig: getAlgodConfigFromViteEnvironment() }), [])
 
   // Keep the signer in sync
   useEffect(() => {
@@ -155,9 +158,7 @@ export function useBountyContract() {
       const client = new BountyClient({
         appId: BigInt(appId),
         algorand,
-        ...(hasSigner
-          ? { defaultSigner: transactionSigner!, defaultSender: activeAddress! }
-          : {}),
+        ...(hasSigner ? { defaultSigner: transactionSigner!, defaultSender: activeAddress! } : {}),
       })
       const result = await client.send.getBountyInfo({ args: [] })
       // return is [address, address, uint64, uint64]

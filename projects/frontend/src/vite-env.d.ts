@@ -19,6 +19,8 @@ interface ImportMetaEnv {
   readonly VITE_KMD_WALLET: string
   readonly VITE_PINATA_JWT?: string
   readonly VITE_PINATA_GATEWAY?: string
+  readonly VITE_SUPABASE_URL?: string
+  readonly VITE_SUPABASE_ANON_KEY?: string
 }
 
 interface ImportMeta {

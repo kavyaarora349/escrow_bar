@@ -1,4 +1,10 @@
 {
+  "terminal.integrated.env.windows": {
+    "PATH": "${env:PATH};${env:USERPROFILE}\\.local\\bin;${env:APPDATA}\\Python\\Python313\\Scripts;${env:APPDATA}\\Python\\Python312\\Scripts;${env:APPDATA}\\npm;C:\\Program Files\\Docker\\Docker\\resources\\bin"
+  }
+}
+
+{
   // Disabled due to matangover.mypy extension not supporting monorepos
   // To be addressed as part of https://github.com/matangover/mypy-vscode/issues/82
   "mypy.enabled": false

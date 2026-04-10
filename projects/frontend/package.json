@@ -1,9 +1,9 @@
 {
-  "name": "bountyhub-frontend",
+  "name": "escrow-bar-frontend",
   "version": "0.1.0",
   "author": {
-    "name": "maroti",
-    "email": "vaibhavspatre@gmail.com"
+    "name": "Kavya Arora",
+    "email": "kavyaarora349@gmail.com"
   },
   "private": true,
   "type": "module",
@@ -62,7 +62,9 @@
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.5.0",
     "tailwindcss-animate": "^1.0.7",
-    "tslib": "^2.6.2"
+"tslib": "^2.6.2",
+  "@google/generative-ai": "^0.20.0"
+
   },
   "scripts": {
     "generate:app-clients": "algokit project link --all",

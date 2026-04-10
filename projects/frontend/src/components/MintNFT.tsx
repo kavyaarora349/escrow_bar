@@ -93,12 +93,26 @@ const MintNFT = ({ openModal, closeModal }: MintNFTProps) => {
         <h3 className="font-bold text-2xl mb-4">Mint NFT (ARC-3)</h3>
         <div className="flex flex-col gap-3">
           <input className="input input-bordered" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
-          <input className="input input-bordered" placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} />
-          <input className="file-input file-input-bordered" type="file" accept="image/*" onChange={(e) => setFile(e.target.files?.[0] || null)} />
+          <input
+            className="input input-bordered"
+            placeholder="Description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+          <input
+            className="file-input file-input-bordered"
+            type="file"
+            accept="image/*"
+            onChange={(e) => setFile(e.target.files?.[0] || null)}
+          />
         </div>
         <div className="modal-action">
-          <button className={`btn btn-primary ${loading ? 'loading' : ''}`} onClick={onMint} disabled={loading}>Mint</button>
-          <button className="btn" onClick={closeModal} disabled={loading}>Close</button>
+          <button className={`btn btn-primary ${loading ? 'loading' : ''}`} onClick={onMint} disabled={loading}>
+            Mint
+          </button>
+          <button className="btn" onClick={closeModal} disabled={loading}>
+            Close
+          </button>
         </div>
       </form>
     </dialog>
@@ -106,4 +120,3 @@ const MintNFT = ({ openModal, closeModal }: MintNFTProps) => {
 }
 
 export default MintNFT
-

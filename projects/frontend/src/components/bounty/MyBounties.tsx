@@ -1,44 +1,44 @@
-import React, { useState, useEffect } from 'react';
-import { useWallet } from '@txnlab/use-wallet-react';
-import { getBountiesByCreator, StoredBounty } from '@/utils/bountyStorage';
-import { Award, ExternalLink, Copy, Trash2 } from 'lucide-react';
+import React, { useState, useEffect } from 'react'
+import { useWallet } from '@txnlab/use-wallet-react'
+import { getBountiesByCreator, StoredBounty } from '@/utils/bountyStorage'
+import { Award, ExternalLink, Copy, Trash2 } from 'lucide-react'
 
 interface MyBountiesProps {
-  refreshTrigger?: number;
+  refreshTrigger?: number
 }
 
 const MyBounties: React.FC<MyBountiesProps> = ({ refreshTrigger = 0 }) => {
-  console.log('🎯 MyBounties component rendering! refreshTrigger:', refreshTrigger);
-  
-  const { activeAddress } = useWallet();
-  const [bounties, setBounties] = useState<StoredBounty[]>([]);
+  console.log('🎯 MyBounties component rendering! refreshTrigger:', refreshTrigger)
+
+  const { activeAddress } = useWallet()
+  const [bounties, setBounties] = useState<StoredBounty[]>([])
 
   // FORCE: Load bounties directly from localStorage on every render
-  const directBounties = activeAddress ? getBountiesByCreator(activeAddress) : [];
-  console.log('🔥 DIRECT LOAD from localStorage:', directBounties.length, directBounties);
+  const directBounties = activeAddress ? getBountiesByCreator(activeAddress) : []
+  console.log('🔥 DIRECT LOAD from localStorage:', directBounties.length, directBounties)
 
   useEffect(() => {
-    console.log('🌟 MyBounties useEffect triggered');
-    console.log('   activeAddress:', activeAddress);
-    console.log('   refreshTrigger:', refreshTrigger);
-    
+    console.log('🌟 MyBounties useEffect triggered')
+    console.log('   activeAddress:', activeAddress)
+    console.log('   refreshTrigger:', refreshTrigger)
+
     if (!activeAddress) {
-      console.log('   ⚠️ No active address, clearing bounties');
-      setBounties([]);
-      return;
+      console.log('   ⚠️ No active address, clearing bounties')
+      setBounties([])
+      return
     }
 
-    console.log('🔍 Fetching bounties for:', activeAddress);
-    const allBounties = getBountiesByCreator(activeAddress);
-    console.log('✅ Found bounties:', allBounties.length, allBounties);
-    setBounties(allBounties);
-  }, [activeAddress, refreshTrigger]);
+    console.log('🔍 Fetching bounties for:', activeAddress)
+    const allBounties = getBountiesByCreator(activeAddress)
+    console.log('✅ Found bounties:', allBounties.length, allBounties)
+    setBounties(allBounties)
+  }, [activeAddress, refreshTrigger])
 
-  console.log('🎨 Rendering MyBounties with', bounties.length, 'bounties. State:', bounties);
+  console.log('🎨 Rendering MyBounties with', bounties.length, 'bounties. State:', bounties)
 
   // Use directBounties for rendering to bypass state issues
-  const bounciesToRender = directBounties.length > 0 ? directBounties : bounties;
-  console.log('📊 Will render:', bounciesToRender.length, 'bounties');
+  const bounciesToRender = directBounties.length > 0 ? directBounties : bounties
+  console.log('📊 Will render:', bounciesToRender.length, 'bounties')
 
   if (!activeAddress) {
     return (
@@ -49,7 +49,7 @@ const MyBounties: React.FC<MyBountiesProps> = ({ refreshTrigger = 0 }) => {
         </div>
         <p className="text-yellow-700">Connect your wallet to view your bounties</p>
       </div>
-    );
+    )
   }
 
   return (
@@ -58,7 +58,7 @@ const MyBounties: React.FC<MyBountiesProps> = ({ refreshTrigger = 0 }) => {
       <div className="bg-red-500 text-white p-4 mb-4 text-center font-bold">
         🚨 MY BOUNTIES COMPONENT IS LOADED! Bounties: {bounciesToRender.length}
       </div>
-      
+
       <div className="flex items-center gap-3 mb-6">
         <Award className="h-6 w-6 text-purple-600" />
         <h2 className="text-2xl font-bold text-purple-900">My Bounties ({bounciesToRender.length})</h2>
@@ -87,8 +87,8 @@ const MyBounties: React.FC<MyBountiesProps> = ({ refreshTrigger = 0 }) => {
                     bounty.status === 'active'
                       ? 'bg-green-100 text-green-800'
                       : bounty.status === 'claimed'
-                      ? 'bg-yellow-100 text-yellow-800'
-                      : 'bg-blue-100 text-blue-800'
+                        ? 'bg-yellow-100 text-yellow-800'
+                        : 'bg-blue-100 text-blue-800'
                   }`}
                 >
                   {bounty.status.toUpperCase()}
@@ -126,13 +126,11 @@ const MyBounties: React.FC<MyBountiesProps> = ({ refreshTrigger = 0 }) => {
               <div className="mb-3">
                 <p className="text-xs text-gray-500 mb-1">App Address</p>
                 <div className="flex items-center gap-2">
-                  <code className="flex-1 bg-gray-100 text-gray-800 text-xs p-2 rounded font-mono truncate">
-                    {bounty.appAddress}
-                  </code>
+                  <code className="flex-1 bg-gray-100 text-gray-800 text-xs p-2 rounded font-mono truncate">{bounty.appAddress}</code>
                   <button
                     onClick={() => {
-                      navigator.clipboard.writeText(bounty.appAddress);
-                      alert('Copied!');
+                      navigator.clipboard.writeText(bounty.appAddress)
+                      alert('Copied!')
                     }}
                     className="p-2 hover:bg-gray-200 rounded"
                     title="Copy address"
@@ -143,9 +141,7 @@ const MyBounties: React.FC<MyBountiesProps> = ({ refreshTrigger = 0 }) => {
               </div>
 
               {/* Created Date */}
-              <p className="text-xs text-gray-500 mb-3">
-                Created {new Date(bounty.createdAt).toLocaleString()}
-              </p>
+              <p className="text-xs text-gray-500 mb-3">Created {new Date(bounty.createdAt).toLocaleString()}</p>
 
               {/* Action Buttons */}
               <div className="flex gap-2 justify-end">
@@ -164,7 +160,7 @@ const MyBounties: React.FC<MyBountiesProps> = ({ refreshTrigger = 0 }) => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default MyBounties;
+export default MyBounties

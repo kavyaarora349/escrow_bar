@@ -1,22 +1,22 @@
-import { Moon, Sun } from "lucide-react";
-import { useEffect, useState } from "react";
+import { Moon, Sun } from 'lucide-react'
+import { useEffect, useState } from 'react'
 
 const ThemeToggle = () => {
-  const [isDark, setIsDark] = useState(true);
+  const [isDark, setIsDark] = useState(true)
 
   useEffect(() => {
-    const root = document.documentElement;
+    const root = document.documentElement
     if (isDark) {
-      root.classList.add("dark");
+      root.classList.add('dark')
     } else {
-      root.classList.remove("dark");
+      root.classList.remove('dark')
     }
-  }, [isDark]);
+  }, [isDark])
 
   // Set dark on mount
   useEffect(() => {
-    document.documentElement.classList.add("dark");
-  }, []);
+    document.documentElement.classList.add('dark')
+  }, [])
 
   return (
     <button
@@ -26,7 +26,7 @@ const ThemeToggle = () => {
     >
       {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
     </button>
-  );
-};
+  )
+}
 
-export default ThemeToggle;
+export default ThemeToggle

@@ -1,8 +1,8 @@
 [tool.poetry]
-name = "OnChain-Counter-contracts"
+name = "escrow-bar-contracts"
 version = "0.1.0"
 description = "Algorand smart contracts"
-authors = ["maroti <vaibhavspatre@gmail.com>"]
+authors = ["Kavya Arora <kavyaarora349@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]

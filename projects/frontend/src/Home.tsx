@@ -72,7 +72,9 @@ const Home: React.FC<HomeProps> = () => {
                   <h2 className="card-title">Send Algo</h2>
                   <p>Send a payment transaction to any address.</p>
                   <div className="card-actions justify-end">
-                    <button className="btn btn-outline" disabled={!activeAddress} onClick={() => setSendAlgoModal(true)}>Open</button>
+                    <button className="btn btn-outline" disabled={!activeAddress} onClick={() => setSendAlgoModal(true)}>
+                      Open
+                    </button>
                   </div>
                 </div>
               </div>
@@ -82,7 +84,9 @@ const Home: React.FC<HomeProps> = () => {
                   <h2 className="card-title">Mint NFT (ARC-3)</h2>
                   <p>Upload to IPFS via Pinata and mint a single NFT.</p>
                   <div className="card-actions justify-end">
-                    <button className="btn btn-outline" disabled={!activeAddress} onClick={() => setMintNftModal(true)}>Open</button>
+                    <button className="btn btn-outline" disabled={!activeAddress} onClick={() => setMintNftModal(true)}>
+                      Open
+                    </button>
                   </div>
                 </div>
               </div>
@@ -92,7 +96,9 @@ const Home: React.FC<HomeProps> = () => {
                   <h2 className="card-title">Create Token (ASA)</h2>
                   <p>Mint a fungible ASA with custom supply and decimals.</p>
                   <div className="card-actions justify-end">
-                    <button className="btn btn-outline" disabled={!activeAddress} onClick={() => setCreateAsaModal(true)}>Open</button>
+                    <button className="btn btn-outline" disabled={!activeAddress} onClick={() => setCreateAsaModal(true)}>
+                      Open
+                    </button>
                   </div>
                 </div>
               </div>
@@ -102,7 +108,9 @@ const Home: React.FC<HomeProps> = () => {
                   <h2 className="card-title">Asset Opt-In</h2>
                   <p>Opt-in to any existing ASA to receive tokens.</p>
                   <div className="card-actions justify-end">
-                    <button className="btn btn-outline" disabled={!activeAddress} onClick={() => setAssetOptInModal(true)}>Open</button>
+                    <button className="btn btn-outline" disabled={!activeAddress} onClick={() => setAssetOptInModal(true)}>
+                      Open
+                    </button>
                   </div>
                 </div>
               </div>
@@ -129,7 +137,9 @@ const Home: React.FC<HomeProps> = () => {
                   <h2 className="card-title">Bank</h2>
                   <p>Deposit and withdraw ALGOs and view statements.</p>
                   <div className="card-actions justify-end">
-                    <button className="btn btn-outline" disabled={!activeAddress} onClick={() => setBankModal(true)}>Open</button>
+                    <button className="btn btn-outline" disabled={!activeAddress} onClick={() => setBankModal(true)}>
+                      Open
+                    </button>
                   </div>
                 </div>
               </div>
@@ -139,16 +149,16 @@ const Home: React.FC<HomeProps> = () => {
       </div>
 
       <ConnectWallet openModal={openWalletModal} closeModal={toggleWalletModal} />
-      <CreateBountyModal 
-        open={createBountyModal} 
+      <CreateBountyModal
+        open={createBountyModal}
         onClose={() => setCreateBountyModal(false)}
         onBountyCreated={() => {
-          console.log('🔄 Home: onBountyCreated callback triggered');
-          setRefreshBounties(prev => {
-            const newValue = prev + 1;
-            console.log(`   Updating refreshBounties: ${prev} → ${newValue}`);
-            return newValue;
-          });
+          console.log('🔄 Home: onBountyCreated callback triggered')
+          setRefreshBounties((prev) => {
+            const newValue = prev + 1
+            console.log(`   Updating refreshBounties: ${prev} → ${newValue}`)
+            return newValue
+          })
         }}
       />
       <AppCalls openModal={appCallsDemoModal} setModalState={setAppCallsDemoModal} />

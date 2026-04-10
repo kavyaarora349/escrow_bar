@@ -9,6 +9,10 @@ import { AuthProvider } from '@/contexts/AuthContext'
 import Index from './pages/Index'
 import NotFound from './pages/NotFound'
 import Home from './Home'
+import { ProjectAIBot } from './features/project-ai/ProjectAIBot'
+import { useWallet } from '@txnlab/use-wallet-react'
+import { useLocation } from 'react-router-dom'
+
 import { getAlgodConfigFromViteEnvironment, getKmdConfigFromViteEnvironment } from './utils/network/getAlgoClientConfigs'
 
 let supportedWallets: SupportedWallet[]
@@ -25,15 +29,26 @@ if (import.meta.env.VITE_ALGOD_NETWORK === 'localnet') {
     },
   ]
 } else {
-  supportedWallets = [
-    { id: WalletId.DEFLY },
-    { id: WalletId.PERA },
-    { id: WalletId.EXODUS },
-    { id: WalletId.LUTE },
-  ]
+  supportedWallets = [{ id: WalletId.DEFLY }, { id: WalletId.PERA }, { id: WalletId.EXODUS }, { id: WalletId.LUTE }]
 }
 
 const queryClient = new QueryClient()
+
+function AppRoutes() {
+  const { pathname } = useLocation()
+  const { activeAddress } = useWallet()
+
+  return (
+    <>
+      <Routes>
+        <Route path="/" element={<Index />} />
+        <Route path="/workshop" element={<Home />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+      <ProjectAIBot activeTab={pathname} walletConnected={!!activeAddress} />
+    </>
+  )
+}
 
 export default function App() {
   const algodConfig = getAlgodConfigFromViteEnvironment()
@@ -64,11 +79,7 @@ export default function App() {
               <Toaster />
               <Sonner />
               <BrowserRouter>
-                <Routes>
-                  <Route path="/" element={<Index />} />
-                  <Route path="/workshop" element={<Home />} />
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
+                <AppRoutes />
               </BrowserRouter>
             </AuthProvider>
           </WalletProvider>

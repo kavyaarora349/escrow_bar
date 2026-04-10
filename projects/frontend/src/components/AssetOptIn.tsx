@@ -46,8 +46,12 @@ const AssetOptIn = ({ openModal, closeModal }: AssetOptInProps) => {
           <input className="input input-bordered" placeholder="ASA ID" value={asaId} onChange={(e) => setAsaId(e.target.value)} />
         </div>
         <div className="modal-action">
-          <button className={`btn btn-primary ${loading ? 'loading' : ''}`} onClick={onOptIn} disabled={loading}>Opt-In</button>
-          <button className="btn" onClick={closeModal} disabled={loading}>Close</button>
+          <button className={`btn btn-primary ${loading ? 'loading' : ''}`} onClick={onOptIn} disabled={loading}>
+            Opt-In
+          </button>
+          <button className="btn" onClick={closeModal} disabled={loading}>
+            Close
+          </button>
         </div>
       </form>
     </dialog>
@@ -55,4 +59,3 @@ const AssetOptIn = ({ openModal, closeModal }: AssetOptInProps) => {
 }
 
 export default AssetOptIn
-

@@ -1,8 +1,8 @@
 # Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
 _commit: 1.6.0
 _src_path: gh:algorandfoundation/algokit-python-template
-author_email: vaibhavspatre@gmail.com
-author_name: maroti
+author_email: kavyaarora349@gmail.com
+author_name: Kavya Arora
 contract_name: counter
 deployment_language: python
 preset_name: production
