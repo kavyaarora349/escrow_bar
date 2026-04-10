@@ -125,20 +125,20 @@ export const DisputesView: React.FC<DisputesViewProps> = ({ bounties }) => {
     <div className="max-w-6xl mx-auto px-4 md:px-8 py-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-white mb-2 tracking-tight">DAO Disputes</h1>
-        <p className="text-slate-400">Open disputes, collect community votes, and resolve bounty disagreements transparently.</p>
+        <p className="text-slate-300/80">Open disputes, collect community votes, and resolve bounty disagreements transparently.</p>
       </div>
 
-      <div className="bg-[#18181b] border border-[#27272a] rounded-xl p-5 mb-6">
+      <div className="bg-[linear-gradient(180deg,#10233d,#0d1a2d)] border border-[#40628e]/60 rounded-2xl p-5 mb-6 shadow-[0_10px_30px_rgba(0,0,0,0.35)]">
         <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
           <Gavel className="h-5 w-5 text-amber-400" />
           Raise A Dispute
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
           <Select value={selectedBountyId} onValueChange={setSelectedBountyId}>
-            <SelectTrigger className="bg-[#0f0f11] border-[#27272a] text-slate-200">
+            <SelectTrigger className="bg-[#111f33] border-[#3d5d85] text-slate-200">
               <SelectValue placeholder="Select bounty" />
             </SelectTrigger>
-            <SelectContent className="bg-[#111113] border-[#27272a] text-slate-200">
+            <SelectContent className="bg-[#111f33] border-[#3d5d85] text-slate-200">
               {disputeEligibleBounties.map((bounty) => (
                 <SelectItem key={bounty.id} value={bounty.id}>
                   {bounty.title}
@@ -151,7 +151,7 @@ export const DisputesView: React.FC<DisputesViewProps> = ({ bounties }) => {
             value={reason}
             onChange={(event) => setReason(event.target.value)}
             placeholder="Reason for dispute"
-            className="bg-[#0f0f11] border-[#27272a] text-slate-200"
+            className="bg-[#111f33] border-[#3d5d85] text-slate-200"
           />
 
           <Button
@@ -162,15 +162,15 @@ export const DisputesView: React.FC<DisputesViewProps> = ({ bounties }) => {
             {submitting ? 'Opening...' : 'Open DAO Dispute'}
           </Button>
         </div>
-        {disputeEligibleBounties.length === 0 && <p className="text-xs text-slate-500 mt-3">No eligible on-chain bounties found yet.</p>}
+        {disputeEligibleBounties.length === 0 && <p className="text-xs text-slate-300/60 mt-3">No eligible on-chain bounties found yet.</p>}
       </div>
 
       {actionError && (
         <div className="mb-4 rounded-lg border border-red-500/30 bg-red-500/10 p-3 text-sm text-red-300">{actionError}</div>
       )}
 
-      <div className="bg-[#18181b] border border-[#27272a] rounded-xl overflow-hidden">
-        <div className="p-6 border-b border-[#27272a] flex items-center justify-between">
+      <div className="bg-[linear-gradient(180deg,#10233d,#0d1a2d)] border border-[#40628e]/60 rounded-2xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.35)]">
+        <div className="p-6 border-b border-[#325176]/70 flex items-center justify-between">
           <h3 className="text-lg font-semibold text-white flex items-center gap-2">
             <Vote className="h-5 w-5 text-blue-400" />
             Dispute Voting
@@ -185,7 +185,7 @@ export const DisputesView: React.FC<DisputesViewProps> = ({ bounties }) => {
         ) : disputes.length === 0 ? (
           <div className="p-8 text-slate-500">No disputes yet. Raise one to start DAO voting.</div>
         ) : (
-          <div className="divide-y divide-[#27272a]">
+          <div className="divide-y divide-[#325176]/60">
             {disputes.map((dispute) => {
               const connected = (activeAddress || '').toLowerCase()
               const hasVoted = dispute.voters.some((entry) => entry.toLowerCase() === connected)
@@ -196,11 +196,11 @@ export const DisputesView: React.FC<DisputesViewProps> = ({ bounties }) => {
                   <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
                     <div>
                       <p className="text-white font-semibold">{dispute.bountyTitle}</p>
-                      <p className="text-slate-400 text-sm mt-1 flex items-center gap-2">
-                        <AlertCircle className="h-4 w-4 text-slate-500" />
+                      <p className="text-slate-300/75 text-sm mt-1 flex items-center gap-2">
+                        <AlertCircle className="h-4 w-4 text-slate-300/50" />
                         {dispute.reason}
                       </p>
-                      <div className="flex flex-wrap gap-3 text-xs text-slate-500 mt-3">
+                      <div className="flex flex-wrap gap-3 text-xs text-slate-300/55 mt-3">
                         <span>Raised by {shortAddress(dispute.raisedBy)}</span>
                         <span>Created {formatDate(dispute.createdAt)}</span>
                         <span>{dispute.amount} ALGO at stake</span>
@@ -217,7 +217,7 @@ export const DisputesView: React.FC<DisputesViewProps> = ({ bounties }) => {
                       >
                         {dispute.status === 'voting' ? 'Voting Live' : 'Resolved'}
                       </span>
-                      <p className="text-xs text-slate-500 mt-2 flex items-center justify-end gap-1.5">
+                      <p className="text-xs text-slate-300/55 mt-2 flex items-center justify-end gap-1.5">
                         <Clock3 className="h-3.5 w-3.5" />
                         {dispute.status === 'voting' ? formatCountdown(dispute.votingEndsAt) : 'Voting closed'}
                       </p>
@@ -225,18 +225,18 @@ export const DisputesView: React.FC<DisputesViewProps> = ({ bounties }) => {
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-4">
-                    <div className="rounded-lg border border-[#27272a] bg-[#0f0f11] p-3">
-                      <p className="text-xs text-slate-400 mb-1">Vote To Pay Creator</p>
+                    <div className="rounded-lg border border-[#3b5e86]/60 bg-[#10233c]/70 p-3">
+                      <p className="text-xs text-slate-300/70 mb-1">Vote To Pay Creator</p>
                       <p className="text-lg font-bold text-white">{dispute.votesForCreator}</p>
                     </div>
-                    <div className="rounded-lg border border-[#27272a] bg-[#0f0f11] p-3">
-                      <p className="text-xs text-slate-400 mb-1">Vote To Pay Worker</p>
+                    <div className="rounded-lg border border-[#3b5e86]/60 bg-[#10233c]/70 p-3">
+                      <p className="text-xs text-slate-300/70 mb-1">Vote To Pay Worker</p>
                       <p className="text-lg font-bold text-white">{dispute.votesForWorker}</p>
                     </div>
                   </div>
 
                   <div className="mt-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-                    <p className="text-xs text-slate-500">Total votes: {totalVotes}</p>
+                    <p className="text-xs text-slate-300/60">Total votes: {totalVotes}</p>
 
                     {dispute.status === 'voting' ? (
                       <div className="flex items-center gap-2">
@@ -244,7 +244,7 @@ export const DisputesView: React.FC<DisputesViewProps> = ({ bounties }) => {
                           size="sm"
                           onClick={() => void handleVote(dispute.id, 'creator')}
                           disabled={!activeAddress || hasVoted}
-                          className="bg-slate-700 hover:bg-slate-600 text-white"
+                          className="bg-[#355474] hover:bg-[#3f6490] text-white"
                         >
                           Vote Creator
                         </Button>

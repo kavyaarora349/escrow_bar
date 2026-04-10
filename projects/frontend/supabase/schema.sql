@@ -73,3 +73,36 @@ on public.disputes for update
 to anon
 using (true)
 with check (true);
+
+create table if not exists public.submissions (
+  id text primary key,
+  bounty_id text not null,
+  submitter text not null,
+  content text not null,
+  created_at bigint not null,
+  status text not null check (status in ('pending', 'approved', 'rejected'))
+);
+
+create index if not exists submissions_bounty_id_idx on public.submissions (bounty_id);
+create index if not exists submissions_created_at_idx on public.submissions (created_at desc);
+
+alter table public.submissions enable row level security;
+
+drop policy if exists "Allow anonymous read submissions" on public.submissions;
+create policy "Allow anonymous read submissions"
+on public.submissions for select
+to anon
+using (true);
+
+drop policy if exists "Allow anonymous write submissions" on public.submissions;
+create policy "Allow anonymous write submissions"
+on public.submissions for insert
+to anon
+with check (true);
+
+drop policy if exists "Allow anonymous update submissions" on public.submissions;
+create policy "Allow anonymous update submissions"
+on public.submissions for update
+to anon
+using (true)
+with check (true);

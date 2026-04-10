@@ -4,8 +4,8 @@ import { X, Clock, MessageSquare, Trophy, Users, MapPin, Bookmark, ChevronRight,
 import { Bounty } from '@/data/bounties'
 import { Button } from '@/components/ui/button'
 import { useWallet } from '@txnlab/use-wallet-react'
-import { BountySubmission, getSubmissionsForBounty, addSubmission, approveSubmission } from '@/utils/submissionStorage'
 import { callClaimMethod, callSubmitWorkMethod, callApproveMethod, getBountyOnChainInfo } from '@/utils/bountyService'
+import { BountySubmission, listSubmissionsForBounty, createSubmission, approveSubmissionById } from '@/utils/submissionRepository'
 
 interface BountyDetailModalProps {
   bounty: Bounty | null
@@ -140,6 +140,12 @@ const BountyDetailModal = ({ bounty, onClose }: BountyDetailModalProps) => {
     activeAddress.toLowerCase() === onChainWorker.toLowerCase() &&
     (onChainStatus === 1 || claimSuccess)
 
+  const loadResponses = async () => {
+    if (!bounty) return
+    const list = await listSubmissionsForBounty(bounty.id)
+    setResponses(list)
+  }
+
   // Fetch on-chain bounty state
   const fetchOnChainState = async () => {
     if (!bounty?.appId) return
@@ -162,10 +168,18 @@ const BountyDetailModal = ({ bounty, onClose }: BountyDetailModalProps) => {
   // Load submissions and on-chain state whenever bounty changes
   useEffect(() => {
     if (bounty) {
-      setResponses(getSubmissionsForBounty(bounty.id))
-      fetchOnChainState()
+      void loadResponses()
+      void fetchOnChainState()
     }
   }, [bounty, activeAddress])
+
+  useEffect(() => {
+    if (!bounty) return
+    const intervalId = window.setInterval(() => {
+      void loadResponses()
+    }, 6000)
+    return () => window.clearInterval(intervalId)
+  }, [bounty?.id])
 
   const handleSubmit = async () => {
     await handleSubmitWork()
@@ -221,20 +235,20 @@ const BountyDetailModal = ({ bounty, onClose }: BountyDetailModalProps) => {
     }
   }
 
-  const handleApprove = (subId: string) => {
-    approveSubmission(subId)
-    setResponses(getSubmissionsForBounty(bounty.id))
+  const handleApprove = async (subId: string) => {
+    await approveSubmissionById(subId, bounty.id)
+    await loadResponses()
   }
 
   const handleSubmitWork = async () => {
     if (bounty.id.toString().startsWith('mock-') || bounty.id.toString().startsWith('sub-') || bounty.appId === undefined || bounty.appId < 100000) {
       setSubmitting(true)
       setSubmitError(null)
-      setTimeout(() => {
+      setTimeout(async () => {
         setSubmitSuccess(true)
         setSubmitText('')
-        addSubmission(bounty.id, activeAddress || 'mock-address', submitText.trim() || 'Mock submission content')
-        setResponses(getSubmissionsForBounty(bounty.id))
+        await createSubmission(bounty.id, activeAddress || 'mock-address', submitText.trim() || 'Mock submission content')
+        await loadResponses()
         setSubmitting(false)
       }, 500)
       return
@@ -252,8 +266,8 @@ const BountyDetailModal = ({ bounty, onClose }: BountyDetailModalProps) => {
       console.log('Submit work transaction sent')
       setSubmitSuccess(true)
       setSubmitText('')
-      addSubmission(bounty.id, activeAddress, submitText.trim())
-      setResponses(getSubmissionsForBounty(bounty.id))
+      await createSubmission(bounty.id, activeAddress, submitText.trim())
+      await loadResponses()
     } catch (err: any) {
       const raw = err?.message || err?.toString() || ''
       let errorMsg: string
@@ -284,7 +298,7 @@ const BountyDetailModal = ({ bounty, onClose }: BountyDetailModalProps) => {
       setApproveResult(null)
       setTimeout(() => {
         setApproveResult({ success: true, appId: bounty.appId || 0, txId: 'mock-tx-id-123456789' })
-        handleApprove(subId)
+        void handleApprove(subId)
         setApproving(false)
       }, 500)
       return
@@ -302,7 +316,7 @@ const BountyDetailModal = ({ bounty, onClose }: BountyDetailModalProps) => {
       const txId = await callApproveMethod(bounty.appId, activeAddress, transactionSigner, workerAddress)
       console.log(`Approve transaction sent! App ID: ${bounty.appId}, Tx ID: ${txId}`)
       setApproveResult({ success: true, appId: bounty.appId, txId })
-      handleApprove(subId)
+      await handleApprove(subId)
     } catch (err: any) {
       console.error('Approve failed:', err)
       setApproveResult({ success: false, error: err?.message || String(err) })
@@ -317,7 +331,7 @@ const BountyDetailModal = ({ bounty, onClose }: BountyDetailModalProps) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-black/60 backdrop-blur-sm"
+        className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
         onClick={onClose}
       >
         <motion.div
@@ -325,13 +339,13 @@ const BountyDetailModal = ({ bounty, onClose }: BountyDetailModalProps) => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 24 }}
           transition={{ type: 'spring', stiffness: 350, damping: 30 }}
-          className="relative w-full max-w-4xl my-8 mx-4 rounded-2xl bg-[#09090b] border border-[#27272a] shadow-2xl overflow-hidden"
+          className="relative w-full max-w-5xl max-h-[92vh] rounded-2xl bg-[#09090b] border border-[#27272a] shadow-2xl overflow-hidden flex flex-col"
           onClick={(e) => e.stopPropagation()}
         >
           {/* ─── Header ─── */}
-          <div className="border-b border-[#27272a] px-6 py-5 md:px-8 bg-[#18181b]/50">
+          <div className="border-b border-[#27272a] px-6 py-5 md:px-8 bg-[#18181b]/50 shrink-0">
             <div className="flex items-start justify-between gap-4">
-              <div className="flex items-start gap-4 min-w-0">
+              <div className="flex items-start gap-4 min-w-0 pr-4">
                 {/* Sponsor logo placeholder */}
                 <div className="h-12 w-12 shrink-0 rounded-xl bg-blue-600 flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-blue-500/20">
                   {(bounty.sponsor || 'A')[0]}
@@ -400,9 +414,9 @@ const BountyDetailModal = ({ bounty, onClose }: BountyDetailModalProps) => {
           </div>
 
           {/* ─── Body: sidebar + main ─── */}
-          <div className="flex flex-col md:flex-row">
+          <div className="flex flex-col md:flex-row min-h-0">
             {/* Left sidebar */}
-            <div className="w-full md:w-72 shrink-0 border-b md:border-b-0 md:border-r border-[#27272a] p-6 md:p-8 space-y-6 bg-[#18181b]/30">
+            <div className="w-full md:w-72 shrink-0 border-b md:border-b-0 md:border-r border-[#27272a] p-6 md:p-8 space-y-6 bg-[#18181b]/30 md:overflow-y-auto">
               {/* Prizes */}
               <div>
                 <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-4">Prizes</h4>
@@ -529,7 +543,7 @@ const BountyDetailModal = ({ bounty, onClose }: BountyDetailModalProps) => {
             </div>
 
             {/* Right content */}
-            <div className="flex-1 p-6 md:p-8 overflow-y-auto max-h-[70vh]">
+            <div className="flex-1 p-6 md:p-8 overflow-y-auto min-h-0">
               <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-4">Details</h3>
 
               {bounty.details ? (

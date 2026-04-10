@@ -39,7 +39,7 @@ const WalletModal = ({ open, onClose }: WalletModalProps) => {
           animate={{ scale: 1, opacity: 1, y: 0 }}
           exit={{ scale: 0.95, opacity: 0, y: 10 }}
           transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-          className="relative w-full max-w-md rounded-2xl glass-modal p-6"
+          className="relative w-full max-w-md rounded-2xl glass-modal p-6 text-slate-900"
           onClick={(e) => e.stopPropagation()}
         >
           <button
@@ -49,20 +49,20 @@ const WalletModal = ({ open, onClose }: WalletModalProps) => {
             <X className="h-4 w-4" />
           </button>
 
-          <h2 className="font-display text-2xl font-bold text-foreground mb-2">Connect Wallet</h2>
-          <p className="text-sm text-muted-foreground mb-6">Select a wallet provider to connect to Algorand</p>
+          <h2 className="font-display text-2xl font-bold text-slate-800 mb-2">Connect Wallet</h2>
+          <p className="text-sm text-slate-600 mb-6">Select a wallet provider to connect to Algorand</p>
 
           {activeAddress && (
             <div className="rounded-xl border border-primary/20 bg-primary/5 p-4 mb-4">
-              <p className="text-xs uppercase tracking-wider text-muted-foreground mb-1">Connected</p>
+              <p className="text-xs uppercase tracking-wider text-slate-600 mb-1">Connected</p>
               <p className="font-mono text-sm text-primary font-medium">{ellipseAddress(activeAddress)}</p>
             </div>
           )}
 
           {!wallets || wallets.length === 0 ? (
             <div className="text-center py-8">
-              <p className="text-sm text-muted-foreground mb-2">No wallets available</p>
-              <p className="text-xs text-muted-foreground/70">Make sure you have a Web3 wallet extension installed (Pera, Defly, etc.)</p>
+              <p className="text-sm text-slate-600 mb-2">No wallets available</p>
+              <p className="text-xs text-slate-500">Make sure you have a Web3 wallet extension installed (Pera, Defly, etc.)</p>
             </div>
           ) : (
             <div className="flex flex-col gap-2">
@@ -71,7 +71,7 @@ const WalletModal = ({ open, onClose }: WalletModalProps) => {
                   <Button
                     key={`provider-${wallet.id}`}
                     variant="outline"
-                    className="w-full justify-start gap-3 h-12 text-sm font-medium hover:border-primary/30 hover:bg-primary/5"
+                    className="w-full justify-start gap-3 h-12 text-sm font-medium text-slate-800 bg-white border-slate-300 hover:border-blue-300 hover:bg-blue-50"
                     onClick={async () => {
                       try {
                         console.log(`Connecting to ${wallet.id}...`)
@@ -85,11 +85,11 @@ const WalletModal = ({ open, onClose }: WalletModalProps) => {
                     }}
                   >
                     {!isKmd(wallet) && <img alt={`${wallet.id} icon`} src={wallet.metadata.icon} className="h-6 w-6 object-contain" />}
-                    <span>{isKmd(wallet) ? 'LocalNet Wallet' : wallet.metadata.name}</span>
+                    <span className="text-slate-800">{isKmd(wallet) ? 'LocalNet Wallet' : wallet.metadata.name}</span>
                   </Button>
                 ))
               ) : (
-                <p className="text-sm text-muted-foreground text-center py-4">Wallet already connected</p>
+                <p className="text-sm text-slate-600 text-center py-4">Wallet already connected</p>
               )}
             </div>
           )}

@@ -54,10 +54,10 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, acti
   ]
 
   return (
-    <div className="min-h-screen bg-[#09090b] text-slate-200 flex flex-col md:flex-row">
+    <div className="min-h-screen bg-[radial-gradient(circle_at_20%_0%,#1f3049_0%,#0b1422_35%,#05080f_100%)] text-slate-200 flex flex-col md:flex-row">
       {/* Sidebar */}
-      <aside className="w-full md:w-64 border-r border-[#27272a] bg-[#0f0f11] flex flex-col shrink-0">
-        <div className="h-16 flex items-center px-6 border-b border-[#27272a]">
+      <aside className="w-full md:w-64 border-r border-[#314056]/60 bg-[#0b1320]/85 backdrop-blur-md flex flex-col shrink-0 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
+        <div className="h-16 flex items-center px-6 border-b border-[#314056]/70">
           <a href="/" className="flex items-center gap-2 group">
             <img
               src="/images/logo.png"
@@ -70,13 +70,15 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, acti
           </a>
         </div>
 
-        <nav className="flex-1 py-6 px-4 space-y-1">
+        <nav className="flex-1 py-6 px-4 space-y-1.5">
           {navItems.map((item) => (
             <button
               key={item.id}
               onClick={() => onTabChange(item.id)}
-              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                activeTab === item.id ? 'bg-[#27272a] text-white' : 'text-slate-400 hover:text-slate-200 hover:bg-[#18181b]'
+              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors ${
+                activeTab === item.id
+                  ? 'bg-[linear-gradient(180deg,#24456f,#1a365a)] text-white border border-[#4b6f9a]/60 shadow-[0_8px_20px_rgba(18,70,139,0.35)]'
+                  : 'text-slate-300 hover:text-white hover:bg-[#142238]/70 border border-transparent'
               }`}
             >
               <item.icon className="h-5 w-5" />
@@ -87,7 +89,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, acti
           {/* Action button in nav */}
           <button
             onClick={onCreateBounty}
-            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-[#18181b] transition-colors mt-6"
+            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:text-white hover:bg-[#142238]/70 transition-colors mt-6 border border-transparent"
           >
             <PlusCircle className="h-5 w-5" />
             Create Bounty
@@ -95,8 +97,8 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, acti
         </nav>
 
         {/* Network indicator at bottom */}
-        <div className="p-4 border-t border-[#27272a]">
-          <div className="flex flex-col gap-2 p-3 rounded-lg border border-[#27272a] bg-[#18181b]">
+        <div className="p-4 border-t border-[#314056]/70">
+          <div className="flex flex-col gap-2 p-3 rounded-xl border border-[#355076]/70 bg-[#101d2f]">
             <p className="text-xs text-slate-500 uppercase font-semibold">Network</p>
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></span>
@@ -107,9 +109,11 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, acti
       </aside>
 
       {/* Main Content Area */}
-      <main className="flex-1 flex flex-col min-w-0">
+      <main className="flex-1 flex flex-col min-w-0 relative">
+        <div className="pointer-events-none absolute inset-0 opacity-25 [background-image:radial-gradient(circle_at_20px_20px,rgba(88,130,182,0.20)_1px,transparent_1px)] [background-size:26px_26px]" />
+        <div className="pointer-events-none absolute inset-0 opacity-30 [background:radial-gradient(ellipse_at_center,transparent_10%,rgba(3,8,18,0.72)_80%)]" />
         {/* Top Header */}
-        <header className="h-16 border-b border-[#27272a] bg-[#09090b]/80 backdrop-blur-md flex items-center justify-between px-8 sticky top-0 z-10">
+        <header className="h-16 border-b border-[#314056]/70 bg-[#0a1220]/70 backdrop-blur-md flex items-center justify-between px-8 sticky top-0 z-10">
           <h2 className="text-sm font-semibold text-white uppercase tracking-wider">
             {activeTab === 'dashboard' && 'Overview'}
             {activeTab === 'browse' && 'Browse Bounties'}
@@ -121,16 +125,16 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, acti
             {walletConnected ? (
               <button
                 onClick={onConnectWallet}
-                className="flex items-center gap-3 bg-[#18181b] border border-[#27272a] hover:bg-[#202024] hover:border-slate-600 transition-colors cursor-pointer rounded-full pl-4 pr-3 py-1.5 shadow-sm group"
+                className="flex items-center gap-3 bg-[#111f32]/85 border border-[#3c577c]/70 hover:bg-[#173154] hover:border-[#5a7cab] transition-colors cursor-pointer rounded-full pl-4 pr-3 py-1.5 shadow-sm group"
               >
                 <div className="flex flex-col items-start leading-none">
                   <span className="text-sm font-semibold text-white">{ellipseAddress(activeAddress)}</span>
                 </div>
-                <div className="flex items-center gap-2 border-l border-[#27272a] pl-3">
+                <div className="flex items-center gap-2 border-l border-[#3e5b81] pl-3">
                   <span className="text-xs font-medium text-emerald-400">
                     {loadingBalance ? '...' : balance !== null ? `${balance.toFixed(2)} ALGO` : '0.00 ALGO'}
                   </span>
-                  <LogOut className="h-4 w-4 text-slate-500 group-hover:text-red-400 transition-colors" />
+                  <LogOut className="h-4 w-4 text-slate-400 group-hover:text-red-300 transition-colors" />
                 </div>
               </button>
             ) : (
@@ -147,7 +151,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, acti
         </header>
 
         {/* View Content */}
-        <div className="flex-1 overflow-auto relative">{children}</div>
+        <div className="flex-1 overflow-auto relative z-[1]">{children}</div>
       </main>
     </div>
   )
