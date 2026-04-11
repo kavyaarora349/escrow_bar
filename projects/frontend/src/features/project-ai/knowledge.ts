@@ -69,9 +69,8 @@ ${network}, Tab: ${activeTab}, Wallet: ${walletConnected ? 'Connected' : 'Discon
 
   // Default
   return {
-    title: 'Project AI',
-    answer: `Project context: ${PROJECT_SUMMARY}
-Ask about BountyHub contracts, frontend, deploy, flows. Tab: ${activeTab}, Wallet: ${walletConnected}`,
+    title: 'EscrowBar Bot',
+    answer: "I'm here to help! You can ask me about bounties, wallet setup, how payouts work, or anything else about EscrowBar.",
     followUps: STARTER_PROMPTS
   }
 }
