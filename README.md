@@ -1,7 +1,7 @@
 # Escrow Bar - Decentralized Bounty Management Platform
 
-[![Live Demo Website](https://img.shields.io/badge/🚀_Live_Demo_Website-3b82f6?style=for-the-badge)](https://bounty-hub-three.vercel.app)
-[![Video Demo](https://img.shields.io/badge/🌐_Video_Demo-10b981?style=for-the-badge)](https://drive.google.com/file/d/1mYLZvda3funTpglnUib1QjDsQNsuykFs/view?usp=drive_link)
+[![Live Demo Website](https://escrow-bar.vercel.app/)
+
 
 A **decentralized bounty management platform** built on the Algorand Testnet using AlgoKit.
 
@@ -25,9 +25,6 @@ It solves trust issues in freelance and hackathon-style bounty systems by introd
 **Unlike traditional bounty platforms, funds are secured by an Algorand smart contract — eliminating trust issues between creators and contributors.**
 
 ## 🎯 Problem Statement
-
-### RIFT Track: Build on Algorand
-
 
 **Freelance bounty platforms today rely on centralized trust, leading to payment disputes, delayed settlements, and lack of transparency between creators and contributors.**
 
@@ -56,13 +53,9 @@ An Algorand **smart contract–powered bounty escrow system** that:
 ## � Live Links & Deployment
 
 ### 🌐 Live Frontend
-**Your Live URL:** [Vercel URL](https://bounty-hub-three.vercel.app/)
+**Your Live URL:** [Vercel URL](https://escrow-bar.vercel.app/)
 
-### 🎥 Demo Video 
-[Demo video URL](https://drive.google.com/file/d/1mYLZvda3funTpglnUib1QjDsQNsuykFs/view?usp=drive_link)
 
-### 🎥 Demo Video (LinkedIn) 
-[LinkedIn video URL](https://www.linkedin.com/posts/sohum-venkatadri-73aa8234b_algorand-algokit-blockchain-ugcPost-7430439403375964160-Sq1G/?utm_source=share&utm_medium=member_android&rcm=ACoAAFeLwZ4B0zh0FUHMnJoBy28zuwA5kY56Uzc)
 
 
 
@@ -79,15 +72,6 @@ An Algorand **smart contract–powered bounty escrow system** that:
 
 
 
----
-
-## 📋 Problem Statement & Solution
-
-### RIFT Track Selection
-**Track:** Build on Algorand 
-**Requirement:** Build a decentralized solution that meaningfully leverages Algorand blockchain beyond simple payments
-
-### Problem Our Solution Addresses
 
 **Traditional Bounty Platforms Have:**
 - ❌ Payment disputes & trust issues
@@ -150,11 +134,7 @@ Built using:
 - **Wallet Integration** - Pera Wallet / Defly / MyAlgo
 - **Algorand JS SDK** - Direct Algod API calls
 - **Atomic Transaction Grouping** - Secure multi-step transactions
-
-#### User Flow
-
-<img width="425" height="467" alt="Screenshot 2026-02-20 at 6 59 45 AM" src="https://github.com/user-attachments/assets/130b3167-dbe7-421d-973a-4b44b90a6d4c" />
-
+- 
 
 
 ### Transaction Flow
@@ -233,8 +213,8 @@ Creator → Frontend → Call approve()
 
 ### Step 1: Clone Repository
 ```bash
-git clone https://github.com/yourusername/bounty-hub.git
-cd bounty-hub
+git clone https://github.com/yourusername/escrow_bar.git
+cd escrow_bar
 ```
 
 ### Step 2: Install Frontend Dependencies
@@ -477,28 +457,6 @@ Uses official Algorand toolkit:
 | **Cost** | $0.001 per transaction (vs. 20-30% platform fee) |
 | **Ownership** | User controls their keys, not platform |
 
-
-
-## �📸 Screenshots
-
-### Home Page
-<img width="1440" height="792" alt="Screenshot 2026-02-20 at 7 10 42 AM" src="https://github.com/user-attachments/assets/f548aab2-6498-4de5-a5fe-46a14772f24b" />
-
-
-### Create Bounty Modal
-<img width="1291" height="699" alt="Screenshot 2026-02-20 at 7 10 58 AM" src="https://github.com/user-attachments/assets/1a3291b3-d4d8-4dc1-9d45-cdc834afa10f" />
-
-
-### All Bounties View
-<img width="1440" height="792" alt="Screenshot 2026-02-20 at 7 11 16 AM" src="https://github.com/user-attachments/assets/40385396-7d11-4c1a-816a-68995a912840" />
-
-
-### APP_ID on Explorer
-<img width="1440" height="792" alt="Screenshot 2026-02-20 at 7 13 25 AM" src="https://github.com/user-attachments/assets/ea6ea0cc-8ab1-4340-b3ce-84577c26c06a" />
-
-
-
-
 ## 🚀 Deployment
 
 ### Deploying to Production
@@ -520,19 +478,6 @@ Uses official Algorand toolkit:
 3. **Update Configuration:**
    - Update `.env` with Mainnet App ID
    - Update README with Mainnet links
-
----
-
-## 👥 Team Members & Roles
-
-| Name | Role | 
-|------|------|
-| Prajwal G | Smart Contract & Backend |
-| Pooja Kumari | Frontend | 
-| Rakshith C | Frontend | 
-| Sohum Venkatadri | Smart Contract | 
-
----
 
 ## 📄 License
 
