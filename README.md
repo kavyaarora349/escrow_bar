@@ -1,8 +1,5 @@
 # Escrow Bar - Decentralized Bounty Management Platform
 
-[![Live Demo Website](https://escrow-bar.vercel.app/)
-
-
 A **decentralized bounty management platform** built on the Algorand Testnet using AlgoKit.
 
 It solves trust issues in freelance and hackathon-style bounty systems by introducing:
